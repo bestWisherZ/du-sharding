@@ -1,0 +1,24 @@
+# Installed into every node by prepare_sharding.sh. Match the deployed contracts.
+cross_write_routing:
+  strategy: none
+  rules:
+    - contract_name: token_business
+      strategy: key_hash
+
+    - contract_name: standard_dfa
+      key_pattern: '^b#(.+)$'
+      strategy: key_hash
+    - contract_name: standard_dfa
+      target_shard: bridge
+
+    - contract_name: standard_dfa_experiment
+      key_pattern: '^b#(.+)$'
+      strategy: key_hash
+    # Deploy with the same initial balance on every shard; do not change it
+    # during a run. Ordinary invocations cannot modify this replicated value.
+    - contract_name: standard_dfa_experiment
+      key_pattern: '^experimentInitialBalance$'
+      strategy: none
+      immutable: true
+    - contract_name: standard_dfa_experiment
+      target_shard: bridge

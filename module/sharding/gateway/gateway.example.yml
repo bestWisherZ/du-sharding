@@ -1,0 +1,65 @@
+# Addresses and TLS files are deployment configuration, never signing identities.
+listen_address: "127.0.0.1:14301"
+listen_tls:
+  enable: false
+default_backend: business-shard1
+bridge_backend: bridge-shard
+business_shards: [business-shard1, business-shard2]
+address_type: ETHEREUM
+hash_type: SHA256
+
+routing_rules:
+  - contract_name: standard_dfa
+    method: Transfer
+    strategy: hash
+    account_parameters: [to]
+    include_sender: true
+  - contract_name: standard_dfa
+    method: BalanceOf
+    strategy: hash
+    account_parameters: [account]
+  - contract_name: standard_dfa
+    method: "*"
+    strategy: fixed
+    target_backend: bridge-shard
+  - contract_name: token_business
+    method: transfer
+    strategy: hash
+    account_parameters: [from, to]
+  - contract_name: standard_dfa_experiment
+    method: TransferExperiment
+    strategy: hash
+    account_parameters: [from, to]
+  - contract_name: standard_dfa_experiment
+    method: BalanceOf
+    strategy: hash
+    account_parameters: [account]
+  - contract_name: standard_dfa_experiment
+    method: "*"
+    strategy: fixed
+    target_backend: bridge-shard
+
+# TLS CA paths are relative to this configuration file. Set client TLS cert/key
+# here only if required by transport authentication; they never sign payloads.
+backends:
+  business-shard1:
+    address: "127.0.0.1:12301"
+    chain_id: chain1
+    tls:
+      enable: true
+      ca_file: "../../../build/business-shard1/crypto-config/wx-org1.chainmaker.org/ca/ca.crt"
+      server_name: chainmaker.org
+  business-shard2:
+    address: "127.0.0.1:12305"
+    chain_id: chain2
+    tls:
+      enable: true
+      ca_file: "../../../build/business-shard2/crypto-config/wx-org1.chainmaker.org/ca/ca.crt"
+      server_name: chainmaker.org
+  bridge-shard:
+    address: "127.0.0.1:12309"
+    chain_id: chain0
+    tls:
+      enable: true
+      ca_file: "../../../build/bridge-shard/crypto-config/wx-org1.chainmaker.org/ca/ca.crt"
+      server_name: chainmaker.org

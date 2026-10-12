@@ -1,0 +1,22 @@
+# Example only. Match the deployed contract's exact ledger key layout.
+# All validators and shards must receive the same policy and shard ordering.
+cross_write_routing:
+  strategy: none
+  rules:
+    # An account-keyed benchmark contract: no business name is built into Go.
+    - contract_name: token_business
+      strategy: key_hash
+
+    # DFA balances use key "b" and field <account>, encoded as b#<account>.
+    - contract_name: standard_dfa
+      key_pattern: '^b#(.+)$'
+      strategy: key_hash
+
+    # A shared mutable value has one authoritative execution owner.
+    # Methods touching it must route to bridge; it is not an immutable copy.
+    - contract_name: standard_dfa
+      target_shard: bridge
+
+# Do not label totalSupply/admin as immutable if Mint/Burn/admin updates exist.
+# Multi-account allowances and other layouts require explicit rules or must
+# stay on one execution owner. This example does not claim full DFA coverage.
