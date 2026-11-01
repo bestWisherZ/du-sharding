@@ -13,9 +13,7 @@
 | `module/sharding/crossshard/` | 桥接写集回写与系统同步交易执行 |
 | `module/sharding/syncproposer/` | 当前 proposer 构造本地同步交易 |
 | `config/config_tpl/` | 节点与创世配置模板 |
-| `config/sharding/` | 合约状态归属策略 |
 | `scripts/` | 配置生成、构建打包、启动、停止和清理脚本 |
-| `tools/sharding-config/` | 状态策略与同步信任配置校验工具 |
 | `tools/cmc/` | 长安链命令行客户端 |
 | `test/testdata/sharding/` | 推进出块、心跳合约源码 |
 | `examples/contracts/standard_dfa_experiment/` | 实验 DFA 转账合约源码 |
