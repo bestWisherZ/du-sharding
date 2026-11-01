@@ -8,7 +8,7 @@
 | --- | --- |
 | `main/`、`module/` | 完整节点源码及分片扩展 |
 | `module/sharding/gateway/` | 可配置交易路由与网关 |
-| `module/sharding/scheduler/` | 阶段调度、出块许可与门控 |
+| `module/sharding/scheduler/` | 阶段调度 |
 | `module/sharding/globalstate/` | 业务区块写集同步与桥接状态镜像 |
 | `module/sharding/crossshard/` | 桥接写集回写与系统同步交易执行 |
 | `module/sharding/syncproposer/` | 当前 proposer 构造本地同步交易 |
@@ -17,10 +17,9 @@
 | `scripts/` | 配置生成、构建打包、启动、停止和清理脚本 |
 | `tools/sharding-config/` | 状态策略与同步信任配置校验工具 |
 | `tools/cmc/` | 长安链命令行客户端 |
-| `test/testdata/sharding/` | 推进出块、心跳辅助合约源码 |
+| `test/testdata/sharding/` | 推进出块、心跳合约源码 |
 | `examples/contracts/standard_dfa_experiment/` | 实验 DFA 转账合约源码 |
 
-仓库不包含部署证书、私钥、运行账本、日志、实验数据集、性能结果、Go 缓存或本机工具软链接。`main/` 中的 Wasmer 支持库和 `wxdec` 为原有构建/运行依赖，不是已部署的节点程序。
 
 ## 环境要求
 
