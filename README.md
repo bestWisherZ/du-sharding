@@ -23,9 +23,8 @@
 
 ## 环境要求
 
-- Linux；以下构建示例按 `amd64` 给出。
 - Go `1.19.x`，本项目验证使用 `1.19.9`。
-- Git、Make、GCC、GNU Bash、GNU sed、tar、7-Zip；`7z` 必须在每台节点服务器的 PATH 中。
+- Git、Make、GCC、GNU Bash、GNU sed、tar、7-Zip。
 - Docker，以及当前用户操作 Docker 的权限。
 - 证书生成工具 `chainmaker-cryptogen v2.4.0`。
 
